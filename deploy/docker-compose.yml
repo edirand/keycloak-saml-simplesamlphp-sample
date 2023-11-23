@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  idp:
+    image: kenchan0130/simplesamlphp
+    container_name: idp
+    environment:
+      SIMPLESAMLPHP_SP_ENTITY_ID: http://localhost:8050/realms/saml-poc
+      SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://localhost:8050/realms/saml-poc/broker/simplesaml/endpoint
+    network_mode: "host"
+    volumes:
+      - ./simplesamlphp-data/authsources.php:/var/www/simplesamlphp/config/authsources.php
+      - ./simplesamlphp-data/saml20-idp-hosted.php:/var/www/simplesamlphp/metadata/saml20-idp-hosted.php
+
+  kc:
+    image: keycloak/keycloak
+    container_name: kc
+    environment:
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+    network_mode: "host"
+    command: ["start-dev", "--http-port 8050"]
