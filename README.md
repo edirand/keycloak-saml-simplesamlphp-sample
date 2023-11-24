@@ -39,7 +39,7 @@ In _deploy_ folder, you can find a docker-compose file that we will use to setup
 - **idp**: our SimpleSAMLphp instance as Identity Provider
 - **kc**: our Keycloak instance that will be used as broker
 
-By default, **idp** will run on port 8080 and **kc** will run on port 8050. We used _host_ network*mode for this containers to make it easier to run on the same host. If you don't want to use \_host* network mode, you can for example configure extra*hosts with a name other than \_localhost* so that **kc** container can communicates with **ipd** container and browser redirections can work.
+By default, **idp** will run on port 8080 and **kc** will run on port 8050. We used *host* network\_mode for this containers to make it easier to run on the same host. If you don't want to use *host* network\_mode, you can for example configure *extra_hosts* with a name other than *localhost* so that **kc** container can communicates with **ipd** container and browser redirections can work.
 
 For the **idp** container, you can see 2 environment variables and 2 volume mounts:
 
@@ -70,11 +70,11 @@ Click on Identity providers in the Configuration section of the menu and choose 
 
 Fill the form with the following information:
 
-**Alias**: <ALIAS>
-**Display name**: Whatever you want, for example: SAML with SimpleSAMLphp
-**Service provider entity ID**: The value you configured in <SIMPLESAMLPHP\*SP*ENTITY_ID> env variable
-**Use entity descriptor**: ON
-**SAML entity descriptor**: <IDP_URL>/simplesaml/saml2/idp/metadata.php (you can find this URL in your **idp** instance by clicking on \_Federation* tab > SAML 2.0 IdP Metadata > Show metadata, it's the first url on the page that will open)
+- **Alias**: \<ALIAS\>
+- **Display name**: Whatever you want, for example: SAML with SimpleSAMLphp
+- **Service provider entity ID**: The value you configured in <SIMPLESAMLPHP\_SP\_ENTITY_ID> env variable
+- **Use entity descriptor**: ON
+- **SAML entity descriptor**: <IDP_URL>/simplesaml/saml2/idp/metadata.php (you can find this URL in your **idp** instance by clicking on *Federation* tab > SAML 2.0 IdP Metadata > Show metadata, it's the first url on the page that will open)
 
 If everything worked correctly, you should see a green check next the SAML entity descriptor url indicating that Keycloak loaded metadata of SimpleSAMLphp IdP. You can next configure the provider as you want, but we'll let the default configuration for this tutorial.
 
@@ -86,12 +86,12 @@ Click on Add to save the provider.
 
 ![setup-client.gif](./doc/imgs/setup-client.gif)
 
-To test the connection with a real app, this repository contains a NextJS app with Next-Auth configured for authentication. We will not explain details of NextJS and Next-Auth here, but you can find more information on their dedicated websites:
+To test the connection with a real app, this repository contains a NextJS app with Next-Auth configured for authentication. We will not explain details of Next.js and Auth.js here, but you can find more information on their dedicated websites:
 
-- NextJS:
-- Next-Auth:
+- Next.js: [Next.js docs](https://nextjs.org/docs)
+- Auth.js: [Auth.js guides](https://authjs.dev/guides)
 
-For simplicity, we just followed the Next-Auth tutorial to setup a login button in a next app using page router.
+For simplicity, we just followed the Auth.js tutorial to setup a login button in a next app using page router.
 
 To allow our app to authenticate users with Keycloak, we need to configure a new OIDC Client in Keycloak.
 
@@ -119,9 +119,9 @@ Click on save and your client is configured. Open the Credentials tab and note t
 In this repository, create a .env file with the following content:
 
 ```env
-KEYCLOAK_CLIENT_ID = <TEST_APP_CLIENT_ID>
-KEYCLOAK_CLIENT_SECRET = <TEST_APP_CLIENT_SECRET>
-KEYCLOAK_ISSUER = <KC_URL>/realms/<REALM_NAME>
+KEYCLOAK_CLIENT_ID=<TEST_APP_CLIENT_ID>
+KEYCLOAK_CLIENT_SECRET=<TEST_APP_CLIENT_SECRET>
+KEYCLOAK_ISSUER=<KC_URL>/realms/<REALM_NAME>
 NEXTAUTH_SECRET=<NEXTAUTH_SECRET>
 ```
 
